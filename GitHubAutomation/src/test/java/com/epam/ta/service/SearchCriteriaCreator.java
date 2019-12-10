@@ -19,7 +19,7 @@ public class SearchCriteriaCreator {
                 Integer.parseInt(TestDataReader.getTestData(TESTDATA_SEARCH_CRITERIA_ROOMS_NUMBER)));
     }
 
-    public static SearchCriteria withEmptyDate() {
+    public static SearchCriteria withIncorrectData() {
         return new SearchCriteria(TestDataReader.getTestData(TESTDATA_SEARCH_CRITERIA_DESTINATION),
                 TestDataReader.getTestData(TESTDATA_SEARCH_CRITERIA_RATING),
                 "", "",

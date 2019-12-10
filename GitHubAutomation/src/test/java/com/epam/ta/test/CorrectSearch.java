@@ -2,8 +2,6 @@ package com.epam.ta.test;
 
 import com.epam.ta.model.SearchCriteria;
 import com.epam.ta.page.HomePage;
-import com.epam.ta.page.HotelDetailsPage;
-import com.epam.ta.page.HotelSelectPage;
 import com.epam.ta.service.SearchCriteriaCreator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -36,12 +34,12 @@ public class CorrectSearch {
 
     @Test
     public void getHotelPricePage() {
-        SearchCriteria searchСriteria = SearchCriteriaCreator.withCredentialsFromProperty();
+        SearchCriteria searchCriteria = SearchCriteriaCreator.withCredentialsFromProperty();
         String hotelPricePage = new HomePage(webDriver)
                 .openPage()
                 .openHotelsPage()
                 .openHotelSelectPage()
-                .correctSearchForHotels(searchСriteria.getDestination(), searchСriteria.getNumberOfGuests())
+                .correctSearchForHotels(searchCriteria.getDestination(), searchCriteria.getNumberOfGuests())
                 .openDetailedHotelInformation(1)
                 .getUrl();
         Assert.assertEquals(hotelPricePage, HOTEL_PRICE_PAGE);

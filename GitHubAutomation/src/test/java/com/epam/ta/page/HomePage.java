@@ -38,7 +38,6 @@ public class HomePage extends AbstractPage{
     public HotelsPage openHotelsPage() {
         this.webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         this.hotelsTab.click();
-        this.searchCreteria.click();
         return new HotelsPage(this.webDriver);
     }
 
