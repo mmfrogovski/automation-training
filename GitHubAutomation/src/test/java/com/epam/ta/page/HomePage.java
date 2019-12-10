@@ -14,7 +14,7 @@ public class HomePage extends AbstractPage{
     @FindBy(xpath = "/html/body/div[1]/header/div[8]/div[1]/div/ul[1]/li[2]/a")
     private WebElement hotelsTab;
 
-    @FindBy(xpath = "/html/body/div[1]/header/div[9]/div[1]/div/button[1]/i")
+    @FindBy(xpath = "/html/body/div[1]/header/div[8]/div[1]/div/button[1]/i")
     private WebElement searchCreteria;
 
 
@@ -36,8 +36,8 @@ public class HomePage extends AbstractPage{
     }
 
     public HotelsPage openHotelsPage() {
-        this.hotelsTab.click();
         this.webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        this.hotelsTab.click();
         this.searchCreteria.click();
         return new HotelsPage(this.webDriver);
     }
