@@ -3,7 +3,7 @@
 <suite name="Smoke" verbose="1" >
     <test name="UserAccess"   >
         <classes>
-            <class name="com.epam.ta.test.CorrectSearch" />
+            <class name="com.epam.ta.test.HotelsSearchTests" />
         </classes>
     </test>
 </suite>

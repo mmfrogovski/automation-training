@@ -14,13 +14,14 @@ import static javax.xml.crypto.dsig.Transform.XPATH;
 
 public class HotelSelectPage extends AbstractPage {
 
-    private WebDriver webDriver;
-
     @FindBy(xpath = "//*[@id=\"co\"]")
     private WebElement destinationsInput;
 
     @FindBy(xpath = "//*[@id=\"cat_4\"]")
     private WebElement rating;
+
+    @FindBy(xpath = "//*[@id=\"cat_5\"]")
+    private WebElement fiveStarsInput;
 
     @FindBy(xpath = "//*[@id=\"content\"]/div/div[2]/div/div/div/div/div[4]/div/div[3]/div[2]/div/input")
     private WebElement guestsSelect;
@@ -28,17 +29,22 @@ public class HotelSelectPage extends AbstractPage {
     @FindBy(xpath = "//*[@id=\"content\"]/div/div[2]/div/div/div/div/div[4]/div/div[3]/div[2]/div/div/div/ul/li[1]/div[1]/div/label[2]/span")
     private WebElement guestsNumber;
 
-    @FindBy(xpath = "//*[@id=\"content\"]/div/div[2]/div/div/div/div/div[8]/div/a[1]/span")
+    @FindBy(xpath = "//*[@id=\"content\"]/div/div[2]/div/div/div/div/div[8]/div/a[1]")
     private WebElement searchHotelsButton;
 
     @FindBy(xpath = "//*[@id=\"content\"]/div[3]/div[2]/div[1]/div/div[1]/div[2]/a")
     private List<WebElement> detailHotelInformationButton;
 
+    @FindBy(xpath = "//*[@id=\"content\"]/div/div[2]/div/div/div/div/div[1]/div/div[1]/div[2]/div/a")
+    private WebElement selectCountryBtn;
+    @FindBy(xpath = "//*[@id=\"content\"]/div/div[2]/div/div/div/div/div[1]/div/div[1]/div[2]/div/div/div/ul/li[3]")
+    private WebElement country;
+
     private static final String TOP_HOTELS_URL = "https://tophotels.ru/";
 
     public HotelSelectPage(WebDriver driver) {
         super(driver);
-        PageFactory.initElements(this.webDriver, this);
+        PageFactory.initElements(driver, this);
     }
 
     @Override
@@ -56,14 +62,28 @@ public class HotelSelectPage extends AbstractPage {
     }
 
     public HotelSelectPage correctSearchForHotels(String destinations, int guestsNumber) {
+        driver.manage().timeouts().implicitlyWait(WAIT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
         destinationsInput.sendKeys(destinations);
         destinationsInput.click();
         this.rating.click();
         this.guestsSelect.click();
         this.guestsNumber = driver.findElement(By.xpath(String.format(XPATH, guestsNumber)));
         this.guestsNumber.click();
-        driver.manage().timeouts().implicitlyWait(WAIT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
         searchHotelsButton.click();
         return this;
     }
+
+    public HotelsPage getFiveStarsHotels(){
+        this.fiveStarsInput.click();
+        this.searchHotelsButton.click();
+        return new HotelsPage(driver);
+    }
+
+    public HotelsPage getCountryHotels(){
+        this.selectCountryBtn.click();
+        this.country.click();
+        this.searchHotelsButton.click();
+        return new HotelsPage(driver);
+    }
+
 }
