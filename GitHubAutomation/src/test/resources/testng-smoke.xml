@@ -4,6 +4,7 @@
     <test name="UserAccess"   >
         <classes>
             <class name="com.epam.ta.test.HotelsSearchTests" />
+            <class name="com.epam.ta.test.HotelsIncorrectSearchTests"/>
         </classes>
     </test>
 </suite>

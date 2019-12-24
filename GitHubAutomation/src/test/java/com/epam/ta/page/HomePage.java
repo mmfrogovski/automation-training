@@ -1,13 +1,16 @@
 package com.epam.ta.page;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
-public class HomePage extends AbstractPage{
+public class HomePage extends AbstractPage {
     private static final String TOP_HOTELS_URL = "https://tophotels.ru/";
 
     @FindBy(xpath = "/html/body/div[1]/header/div[8]/div[1]/div/ul[1]/li[2]/a")
@@ -16,13 +19,13 @@ public class HomePage extends AbstractPage{
     @FindBy(xpath = "/html/body/div[1]/header/div[8]/div[1]/div/button[1]/i")
     private WebElement searchCreteria;
 
-    @FindBy(xpath = "/html/body/div[1]/header/div[9]/div[1]/div/ul[1]/li[4]/a")
-    private WebElement helpForSearchButton;
+    final static private String XPATH_TO_HELP_FOR_SEARCH_BTN = "/html/body/div[1]/header/div[9]/div[1]/div/ul[1]/li[4]/a";
 
-    @FindBy(xpath = "/html/body/div[1]/div[1]/div[4]/div[2]/div/div[1]")
-    private WebElement switchLangBtn;
+    private WebElement commonElement;
 
-    @FindBy(xpath = "/html/body/div[1]/div[1]/div[4]/div[2]/div/div[2]/div")
+    final static private String XPATH_TO_SWITCH_BTN = "/html/body/div[1]/div[1]/div[4]/div[2]/div/div[1]";
+
+    final static String XPATH_OF_LANG_BTN = "/html/body/div[1]/div[1]/div[4]/div[2]/div/div[2]/div";
     private WebElement engLangBtn;
 
     public HomePage(WebDriver webDriver) {
@@ -32,13 +35,12 @@ public class HomePage extends AbstractPage{
     }
 
     @Override
-    public HomePage openPage(){
+    public HomePage openPage() {
         return this;
     }
 
     public HomePage openHomePage() {
         driver.get(TOP_HOTELS_URL);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return this;
     }
 
@@ -48,18 +50,24 @@ public class HomePage extends AbstractPage{
         return new HotelPage(driver);
     }
 
-    public HelpForSearchPage openHelpForSearchPage(){
-        this.helpForSearchButton.click();
+    public HelpForSearchPage openHelpForSearchPage() {
+        this.commonElement = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(XPATH_TO_HELP_FOR_SEARCH_BTN)));
+        this.commonElement.click();
         return new HelpForSearchPage(driver);
     }
 
-    public HomePage switchLangEng(){
-        this.switchLangBtn.click();
+    public HomePage switchLangEng() {
+        this.commonElement = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(XPATH_TO_SWITCH_BTN)));
+        this.commonElement.click();
+        this.engLangBtn = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(XPATH_OF_LANG_BTN)));
         this.engLangBtn.click();
         return new HomePage(driver);
     }
 
-    public String getUrl(){
+    public String getUrl() {
         return driver.getCurrentUrl();
     }
 }

@@ -43,6 +43,7 @@ public class HotelPage extends AbstractPage {
     }
 
     public HotelPage getCity() {
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         this.getCity.click();
         return this;
     }
@@ -54,6 +55,7 @@ public class HotelPage extends AbstractPage {
     }
 
     public String getSearchNotFoundResult() throws InterruptedException {
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return this.notFound.getText();
     }
 }

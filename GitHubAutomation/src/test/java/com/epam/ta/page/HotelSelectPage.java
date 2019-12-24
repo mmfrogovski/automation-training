@@ -54,7 +54,7 @@ public class HotelSelectPage extends AbstractPage {
 
 
     public HotelDetailsPage openDetailedHotelInformation(int hotelNumber) {
-        driver.manage().timeouts().implicitlyWait(WAIT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         detailHotelInformationButton.get(hotelNumber - 1).click();
         ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles());
         driver.switchTo().window(newTab.get(1));
@@ -62,7 +62,7 @@ public class HotelSelectPage extends AbstractPage {
     }
 
     public HotelSelectPage correctSearchForHotels(String destinations, int guestsNumber) {
-        driver.manage().timeouts().implicitlyWait(WAIT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         destinationsInput.sendKeys(destinations);
         destinationsInput.click();
         this.rating.click();
@@ -74,12 +74,14 @@ public class HotelSelectPage extends AbstractPage {
     }
 
     public HotelsPage getFiveStarsHotels(){
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         this.fiveStarsInput.click();
         this.searchHotelsButton.click();
         return new HotelsPage(driver);
     }
 
     public HotelsPage getCountryHotels(){
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         this.selectCountryBtn.click();
         this.country.click();
         this.searchHotelsButton.click();

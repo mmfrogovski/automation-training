@@ -23,7 +23,7 @@ public class HotelDetailsPage extends AbstractPage {
     }
 
     public HotelDetailsPage openPricePage() {
-        driver.manage().timeouts().implicitlyWait(WAIT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         priceButton.click();
         return this;
     }

@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.concurrent.TimeUnit;
+
 public class HelpForSearchPage extends AbstractPage {
 
     @FindBy(xpath = "//*[@id=\"bookingcomplex-name\"]")
@@ -32,6 +34,7 @@ public class HelpForSearchPage extends AbstractPage {
     }
 
     public boolean enterContactValues(String incorrectEmail){
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         this.editNameField.click();
         this.editNameField.sendKeys(StringUtils.NAME);
         this.editPhoneNumberField.click();
