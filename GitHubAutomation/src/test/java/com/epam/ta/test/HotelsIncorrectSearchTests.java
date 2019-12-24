@@ -27,7 +27,7 @@ public class HotelsIncorrectSearchTests extends CommonConditions {
                 .openHomePage()
                 .openHotelPage()
                 .insertInputLineValue(oneSymbolSearchData)
-                .getSearchNotFoundResult();
+                .getSearchMoreSymbolsResult();
         Assert.assertEquals(enterMoreSymbolsTxt, result);
     }
 
@@ -37,7 +37,7 @@ public class HotelsIncorrectSearchTests extends CommonConditions {
                 .openHomePage()
                 .openHelpForSearchPage()
                 .enterContactValues(incorrectEmail);
-        Assert.assertFalse(result);
+        Assert.assertTrue(result);
     }
 
 }

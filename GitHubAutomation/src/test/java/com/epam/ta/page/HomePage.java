@@ -19,9 +19,11 @@ public class HomePage extends AbstractPage {
     @FindBy(xpath = "/html/body/div[1]/header/div[8]/div[1]/div/button[1]/i")
     private WebElement searchCreteria;
 
-    final static private String XPATH_TO_HELP_FOR_SEARCH_BTN = "/html/body/div[1]/header/div[9]/div[1]/div/ul[1]/li[4]/a";
 
     private WebElement commonElement;
+
+    @FindBy(xpath = "/html/body/div[1]/header/div[8]/div[1]/div/ul[1]/li[4]/a")
+    private WebElement helpPageBtn;
 
     final static private String XPATH_TO_SWITCH_BTN = "/html/body/div[1]/div[1]/div[4]/div[2]/div/div[1]";
 
@@ -51,9 +53,8 @@ public class HomePage extends AbstractPage {
     }
 
     public HelpForSearchPage openHelpForSearchPage() {
-        this.commonElement = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(XPATH_TO_HELP_FOR_SEARCH_BTN)));
-        this.commonElement.click();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        this.helpPageBtn.click();
         return new HelpForSearchPage(driver);
     }
 

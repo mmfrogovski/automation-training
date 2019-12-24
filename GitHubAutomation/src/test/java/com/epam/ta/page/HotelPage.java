@@ -15,6 +15,8 @@ public class HotelPage extends AbstractPage {
     private WebElement searchLine;
     @FindBy(xpath = "/html/body/div[1]/div[4]/div[4]/div/div[9]/div/span")
     private WebElement getCity;
+    @FindBy(xpath = "/html/body/div[1]/div[4]/div[4]/div/span")
+    private WebElement moreSymbolsFound;
     @FindBy(xpath = "/html/body/div[1]/div[4]/div[4]/div/div/div/span")
     private WebElement notFound;
     @FindBy(xpath = "/html/body/div[1]/header/div[8]/div[1]/div/button[1]/i")
@@ -57,5 +59,10 @@ public class HotelPage extends AbstractPage {
     public String getSearchNotFoundResult() throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return this.notFound.getText();
+    }
+
+    public String getSearchMoreSymbolsResult() throws InterruptedException {
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        return this.moreSymbolsFound.getText();
     }
 }
